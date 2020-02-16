@@ -1,4 +1,4 @@
-package liuwen.service;
+package com.liuwen.service;
 
 public interface LoginService {
 }

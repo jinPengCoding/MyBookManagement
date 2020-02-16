@@ -1,4 +1,4 @@
-package liuwen.controller;
+package com.liuwen.controller;
 
 public class LoginServlet {
 }

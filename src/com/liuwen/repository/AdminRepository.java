@@ -1,4 +1,4 @@
-package liuwen.repository;
+package com.liuwen.repository;
 
 public interface AdminRepository {
 }
