@@ -50,10 +50,10 @@
 	</div>
 	<div id="footer">
 		<div class="foot_content">
-			CopyRight &copy; 2008 www.**********.com 西安市*****有限公司
+			CopyRight &copy; 2020 780442619@qq.com 南京邮电大学
 		</div>
 		<div class="foot_content">
-			版权所有 Library V1.0
+			版权所有 卫星通信研究所 V1.0
 		</div>
 	</div>
 </body>

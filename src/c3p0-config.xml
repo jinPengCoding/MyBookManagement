@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <c3p0-config>
 
-	<named-config name="testc3p0">
+	<named-config name="JdbcTools">
 		
 		<!-- 指定连接数据源的基本属性 -->
 		<property name="user">root</property>
-		<property name="password">19900310</property>
+		<property name="password">root</property>
 		<property name="driverClass">com.mysql.jdbc.Driver</property>
 		<property name="jdbcUrl">jdbc:mysql://localhost:3306/library?useUnicode=true&amp;characterEncoding=UTF-8</property>
 		
