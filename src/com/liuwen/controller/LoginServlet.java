@@ -50,9 +50,7 @@ public class LoginServlet extends HttpServlet {
                     Reader reader = (Reader) object;
                     session.setAttribute("reader",reader);
                     //跳转到读者Reader首页
-                    List<Book> list = bookService.findAll();
-                    req.setAttribute("list",list);
-                    req.getRequestDispatcher("index.jsp").forward(req,resp);
+                    resp.sendRedirect("/book?page=1");
                     break;
                 case "admin":
                     Admin admin = (Admin) object;

@@ -20,14 +20,16 @@ import java.util.List;
 public class BookRepositoryImpl implements BookRepository {
 
     @Override
-    public List<Book> findAll() {
+    public List<Book> findAll(int index,int limit) {
         Connection connection = JDBCTools.getConnection();
-        String sql = "select * from book,bookcase where book.bookcaseid = bookcase.id";
+        String sql = "select * from book,bookcase where book.bookcaseid = bookcase.id limit ?,? ";
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         List<Book> list = new ArrayList<>();
         try {
             statement = connection.prepareStatement(sql);
+            statement.setInt(1,index);
+            statement.setInt(2,limit);
             resultSet = statement.executeQuery();
             while(resultSet.next()){
                 list.add(new Book(resultSet.getInt(1),resultSet.getString(2),
@@ -41,5 +43,33 @@ public class BookRepositoryImpl implements BookRepository {
             JDBCTools.release(connection,statement,resultSet);
         }
         return list;
+    }
+
+    /**
+     * @Description: 获取数据的总个数
+      * @param
+     * @return int
+     * @date 20.2.18 18:44
+     */
+    @Override
+    public int count() {
+        Connection connection = JDBCTools.getConnection();
+        String sql = "select count(*) from book,bookcase where book.bookcaseid = bookcase.id";
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        int count = 0;
+        try {
+            statement = connection.prepareStatement(sql);
+            resultSet = statement.executeQuery();
+            while (resultSet.next()){
+                count = resultSet.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            JDBCTools.release(connection,statement,resultSet);
+        }
+        int i =0;
+        return count;
     }
 }
