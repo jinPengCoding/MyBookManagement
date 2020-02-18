@@ -38,5 +38,13 @@ public class BookServlet extends HttpServlet {
         req.setAttribute("pages",bookService.getPages());
         req.getRequestDispatcher("index.jsp").forward(req,resp);
 
+        //图书借阅功能  （往borrow表中添加数据的过程）
+
+
+        //展示当前用户的借阅情况（查询当前用户的借阅）
+
+
+
+
     }
 }
