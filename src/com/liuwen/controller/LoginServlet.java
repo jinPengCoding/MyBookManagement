@@ -1,8 +1,11 @@
 package com.liuwen.controller;
 
 import com.liuwen.entity.Admin;
+import com.liuwen.entity.Book;
 import com.liuwen.entity.Reader;
+import com.liuwen.service.BookService;
 import com.liuwen.service.LoginService;
+import com.liuwen.service.impl.BookServiceImpl;
 import com.liuwen.service.impl.LoginServiceImpl;
 
 import javax.servlet.ServletException;
@@ -12,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * @program: MyBookManagement
@@ -23,6 +27,7 @@ import java.io.IOException;
 public class LoginServlet extends HttpServlet {
 
     private LoginService loginService = new LoginServiceImpl();
+    private BookService bookService = new BookServiceImpl();
 /**
  * @Description: 这里处理登录业务
   * @param req
@@ -45,6 +50,8 @@ public class LoginServlet extends HttpServlet {
                     Reader reader = (Reader) object;
                     session.setAttribute("reader",reader);
                     //跳转到读者Reader首页
+                    List<Book> list = bookService.findAll();
+                    req.setAttribute("list",list);
                     req.getRequestDispatcher("index.jsp").forward(req,resp);
                     break;
                 case "admin":
