@@ -61,7 +61,7 @@ public class BookServlet extends HttpServlet {
                  //展示当前用户的所有借书记录
                  List<Borrow> borrowList = bookService.findAllBorrowByReaderId(reader.getId(),page);
                  req.setAttribute("list",borrowList);
-                 req.setAttribute("dataPrePage",6);
+                 req.setAttribute("dataPrePage",10);
                  req.setAttribute("currentPage",page);
                  req.setAttribute("pages",bookService.getBorrowPages(reader.getId()));
                  req.getRequestDispatcher("borrow.jsp").forward(req,resp);
