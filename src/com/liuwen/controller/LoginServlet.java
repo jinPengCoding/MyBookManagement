@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.List;
 
 /**
  * @program: MyBookManagement
@@ -56,7 +55,8 @@ public class LoginServlet extends HttpServlet {
                     Admin admin = (Admin) object;
                     session.setAttribute("admin",admin);
                     //跳转到管理员Admin首页
-                    req.getRequestDispatcher("admin.jsp").forward(req,resp);
+//                    req.getRequestDispatcher("admin.jsp").forward(req,resp);
+                    resp.sendRedirect("/admin?method=findAllBorrow&page=1");
                     break;
             }
         }else {

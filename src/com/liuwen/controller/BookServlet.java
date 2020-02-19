@@ -1,6 +1,7 @@
 package com.liuwen.controller;
 
 import com.liuwen.entity.Book;
+import com.liuwen.entity.Borrow;
 import com.liuwen.entity.Reader;
 import com.liuwen.service.BookService;
 import com.liuwen.service.impl.BookServiceImpl;
@@ -52,10 +53,18 @@ public class BookServlet extends HttpServlet {
                  String bookidStr = req.getParameter("bookid");
                  int bookid =Integer.parseInt(bookidStr);
                  bookService.addBorrow(bookid,reader.getId());
-
+                 resp.sendRedirect("/book?method=findAllBorrow&page=1");
              break;
              case "findAllBorrow":   //展示当前用户的借阅情况（查询当前用户的借阅）
-
+                 pageStr = req.getParameter("page");
+                 page  = Integer.parseInt(pageStr);
+                 //展示当前用户的所有借书记录
+                 List<Borrow> borrowList = bookService.findAllBorrowByReaderId(reader.getId(),page);
+                 req.setAttribute("list",borrowList);
+                 req.setAttribute("dataPrePage",6);
+                 req.setAttribute("currentPage",page);
+                 req.setAttribute("pages",bookService.getBorrowPages(reader.getId()));
+                 req.getRequestDispatcher("borrow.jsp").forward(req,resp);
              break;
         }
 

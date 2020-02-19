@@ -1,9 +1,10 @@
 package com.liuwen.service.impl;
 
 import com.liuwen.entity.Book;
+import com.liuwen.entity.Borrow;
 import com.liuwen.repository.BookRepository;
 import com.liuwen.repository.BorrowRepository;
-import com.liuwen.repository.BorrowRepositoryImpl;
+import com.liuwen.repository.impl.BorrowRepositoryImpl;
 import com.liuwen.repository.impl.BookRepositoryImpl;
 import com.liuwen.service.BookService;
 
@@ -77,7 +78,65 @@ public class BookServiceImpl implements BookService {
         Date date2 = calendar.getTime();
         String returnTime = simpleDateFormat.format(date2);
         borrowRepository.addBorrow(bookid,readerid,borrowTime,returnTime,null,0);
+    }
+    /**
+     * @Description:  图书借阅显示
+      * @param readerid
+ * @param page
+     * @return java.util.List<com.liuwen.entity.Borrow>
+     * @date 20.2.19 14:35
+     */
+    @Override
+    public List<Borrow> findAllBorrowByReaderId(Integer readerid, Integer page) {
+        //业务：将 page 换算成 index,limit
+        int index = (page-1)*LIMIT;
+        return borrowRepository.findAllBorrowByReaderId(readerid,index,LIMIT);
+    }
 
+    /**
+     * @Description:   获取借阅总页数
+      * @param readerid
+     * @return int
+     * @date 20.2.19 14:35
+     */
+    @Override
+    public int getBorrowPages(Integer readerid) {
+        int count = borrowRepository.count(readerid);
+        int page = 0;
+        if(count % LIMIT == 0){
+            page = count/LIMIT;
+        }else{
+            page = count/LIMIT+1;
+        }
+        return page;
+    }
 
+    @Override
+    public List<Borrow> findAllBorrow(Integer state, Integer page) {
+        int index = (page-1)*LIMIT;
+        return borrowRepository.findAllBorrow(state,index,LIMIT);
+    }
+
+    @Override
+    public int getBorrowPagesByState(Integer state) {
+        int count = borrowRepository.countByState(state);
+        int page = 0;
+        if(count % LIMIT == 0){
+            page = count/LIMIT;
+        }else{
+            page = count/LIMIT+1;
+        }
+        return page;
+    }
+
+    @Override
+    public List<Borrow> findAllBorrowByState(Integer state, Integer page) {
+        int index = (page-1)*LIMIT;
+        return borrowRepository.findAllBorrowByState(state,index,LIMIT);
+    }
+
+    @Override
+    public void handleBorrow(Integer borrowId, Integer state, Integer adminId) {
+        borrowRepository.handle(borrowId,state,adminId);
     }
 }
