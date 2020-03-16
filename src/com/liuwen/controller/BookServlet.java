@@ -45,7 +45,7 @@ public class BookServlet extends HttpServlet {
                  List<Book> list = bookService.findAll(page);
                  req.setAttribute("list",list);
                  req.setAttribute("dataPrePage",10);      //每页显示的数据个数 10
-                 req.setAttribute("currentPage",page);       //当前页数赋值给 currentPage
+                 req.setAttribute("currentPage",page);       //当前页数赋值给currentPage
                  req.setAttribute("pages",bookService.getPages());
                  req.getRequestDispatcher("index.jsp").forward(req,resp);
              break;

@@ -3,7 +3,7 @@ package com.liuwen.entity;
 /**
  * @author: Liu Wen
  * @create: 2020-02-18 16:19
- * @description: Good good study,day day up!
+ * @description:                 对应书的类型
  * 对应于外表BookCase
  **/
 public class BookCase {
